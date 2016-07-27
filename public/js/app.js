@@ -17,7 +17,7 @@ $form.on('submit',function(event){
 	event.preventDefault();
 	var msg=$form.find('input[name=message]');
 	socket.emit('message',{
-		text:msg.val();
+		text:msg.val()
 	});
 
 	msg.val('');
