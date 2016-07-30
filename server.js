@@ -1,87 +1,85 @@
-var PORT=process.env.PORT || 3000;
-var express=require('express');
-var app=express();
-var http=require('http').Server(app);//start new server use express app
-var io=require('socket.io')(http);
-var moment=require('moment');
-app.use(express.static(__dirname+'/public'));
+var PORT = process.env.PORT || 3000;
+var express = require('express');
+var app = express();
+var http = require('http').Server(app); //start new server use express app
+var io = require('socket.io')(http);
+var moment = require('moment');
+app.use(express.static(__dirname + '/public'));
 
-var clientInfo={};
+var clientInfo = {};
 
-function sendCurrentUsers(socket){
-	
-	var info=clientInfo[socket.id];
-	var users=[];
+function sendCurrentUsers(socket) {
 
-	if(typeof info === 'undefined'){
+	var info = clientInfo[socket.id];
+	var users = [];
+
+	if (typeof info === 'undefined') {
 		return;
 	}
 
-	Object.keys(clientInfo).forEach(function(socketId){
-		var userInfo=clientInfo[socketId];
+	Object.keys(clientInfo).forEach(function (socketId) {
+		var userInfo = clientInfo[socketId];
 
-		if(info.room === userInfo.room){
+		if (info.room === userInfo.room) {
 			users.push(userInfo.name);
 		}
 	});
 
-	socket.emit('message',{
-		name:'System',
-		text: 'Current users: '+users.join(', '),
-		timestamp:moment.valueOf()
+	socket.emit('message', {
+		name : 'System',
+		text : 'Current users: ' + users.join(', '),
+		timestamp : moment.valueOf(),
 	});
 }
 
-io.on('connection',function(socket){
-	console.log('User Connect via socket.io!');	
+io.on('connection', function (socket) {
 
-	socket.on('disconnect',function(){
-		var userData=clientInfo[socket.id];
-		if(typeof userData !== undefined)
-		{
+	console.log('User Connect via socket.io!');
+
+	socket.on('disconnect', function () {
+		var userData = clientInfo[socket.id];
+		if (typeof userData !== undefined) {
 			socket.leave(userData.room);
-			io.to(userData.room).emit('message',{
-				name:'System',
-				text:userData.name+' has left!',
-				timestamp: moment().valueOf()
+			io.to(userData.room).emit('message', {
+				name : 'System',
+				text : userData.name + ' has left!',
+				timestamp : moment().valueOf()
 			});
 			delete clientInfo[socket.id];
 		}
 	});
 
-	socket.on('joinRoom',function(req){
-		clientInfo[socket.id]=req; 
+	socket.on('joinRoom', function (req) {
+		clientInfo[socket.id] = req;
 		socket.join(req.room);
-		socket.broadcast.to(req.room).emit('message',{
-			name:'System',
-			text:req.name+' has jojned!',
-			timestamp: moment().valueOf()
+		socket.broadcast.to(req.room).emit('message', {
+			name : 'System',
+			text : req.name + ' has join!',
+			timestamp : moment().valueOf()
 		});
 	});
 
-	socket.on('message',function(message){
-		console.log('Message Received: '+message.text);
+	socket.on('message', function (message) {
 
-		if(message.text === '@currentUsers')
-		{
+		console.log('Message Received: ' + message.text);
+
+		if (message.text === '@currentUsers') {
 			sendCurrentUsers(socket);
-		}else
-		{				
-			message.timestamp=moment().valueOf();
-			io.to(clientInfo[socket.id].room).emit('message',message);
+		} else {
+			message.timestamp = moment().valueOf();
+			io.to(clientInfo[socket.id].room).emit('message', message);
 			//socket.broadcast.emit('message',message);
 		}
 	});
 
 	//..event name and data
-	socket.emit('message',{
-		name:'System',
-		text:'Welcome to the Chat application',
-		timestamp:moment().valueOf()
+	socket.emit('message', {
+		name : 'System',
+		text : 'Welcome to the Chat application',
+		timestamp : moment().valueOf()
 	});
 });
 
-http.listen(PORT,function(){
+http.listen(PORT, function () {
 	console.log('Server Started');
 });
-

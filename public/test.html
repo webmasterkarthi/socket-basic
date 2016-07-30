@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        #chatwindow{
+    position:relative;
+    height:400px;
+}
+
+#messagewindow{   
+    position:absolute;
+    left:0;
+    right:0;
+    border:1px solid #000;
+    overflow:auto;
+    top:0;
+    bottom:3em;
+}
+
+    </style>
+    <script src="F:/New/the-complete-node-js-developer-course/My Practical/sockets/public/js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#messagewindow').animate({
+                scrollTop: $('#messagewindow')[0].scrollHeight}, 2000);
+        });
+    </script>
+</head>
+<body>
+
+ <div id="messagewindow">
+    <p>Daniel wrote: Great party yesterday</p>
+    <p>Alex wrote: stil hungover</p>
+    <p>Chris: great party? nah.</p>
+    <p>Sam: what party</p>
+    <p>Chris: great party? nah.</p>
+    <p>Sam: what party</p>
+    <p>jenny: partytime!</p>
+    <p>Daniel wrote: Great party yesterday</p>
+    <p>Alex wrote: stil hungover</p>
+    <p>Chris: great party? nah.</p>
+    <p>Sam: what party</p>
+    <p>jenny: partytime!</p>
+ </div> 
+
+</body>
+</html>
