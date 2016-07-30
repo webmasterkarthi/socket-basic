@@ -18,10 +18,7 @@ function validate_loginForm()
 	}
 	else
 	{
-		// var win = window.open('/chat.html', 'name', 'width=500,location=no,menubar=no,height=700,scrollbars=no,resizable=no,fullscreen=no');
-  		// win.addEventListener("resize", function(){  
-		// win.resizeTo(500,800);
-  		// });		
+	
 		$form.submit();
 	}	
 }

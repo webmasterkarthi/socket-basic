@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>My Chat App</title>
-		<link rel="stylesheet" href="./css/bootstrap.min.css">
-			<link rel="stylesheet" href="./css/customscrollbar.css">
-				<link rel="stylesheet" type="text/css" href="./css/">	
-				</head>
-				<body>	
-					<div class="container">
-						<div class="row">				
-							<div  class="col-md-6 col-md-offset-3 well border">						
-								<h1 class="room-title text-center"/>
-								<div id="chat" class="chat border">
-									<ul class="messages list-group">
-									</ul>
-								</div>
-								<div class="form-group"/>
-								<form id="message-form">
-									<div class="form-group">
-										<div class="input-group">
-											<span class="input-group-addon">
-												<i class="glyphicon glyphicon-comment"/>js
-											</span>
-											<input type="text" name="message" class="form-control" autocomplete="off">
-											</div>
-										</div>						
-									</form>
-									<a href="/index.html" class="btn btn-primary" style="float:right;">Logout</a>
-								</div>				
+<head>
+	<title>My Chat App</title>
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/customscrollbar.css">
+	<link rel="stylesheet" type="text/css" href="./css/">
+	
+</head>
+<body>	
+		<div class="container">
+
+			<div class="row" style="">				
+				<div  class="col-md-6 col-md-offset-3 well border">						
+				<h1 class="room-title text-center"></h1>
+							<div id="chat" class="chat border">
+								<ul class="messages list-group">
+								</ul>
 							</div>
-						</div>
-					</div>
-					<script src="https://cdn.socket.io/socket.io-1.4.5.js"/>
-					<script scr="/js/socket.io-1.4.5.js"/>
-					<script src="/js/jquery-3.1.0.min.js"/>
-					<script src="/js/moment.js"/>
-					<script src="/js/QueryParams.js"/>
-					<script src="/js/app.js"/>
-				</body>
-			</html>
+							<div class="form-group"></div>
+							<form id="message-form">
+								<div class="form-group">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="glyphicon glyphicon-comment"></i>
+									</span>
+									<input type="text" name="message" class="form-control" autocomplete="off">
+									</div>
+								</div>						
+							</form>
+							<a href="/index.html" class="btn btn-primary" style="float:right;">Logout</a>
+						
+				</div>
+				
+			</div>
+
+			</div>
+		</div>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script scr="/js/socket.io-1.4.5.js"></script>
+<script src="/js/jquery-3.1.0.min.js"></script>
+<script src="/js/moment.js"></script>
+<script src="/js/QueryParams.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
